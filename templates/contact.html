@@ -1,0 +1,394 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
+
+  <title> Matoshree Hospital </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Owl Slider Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+  <!-- AOS Animation library -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              Matoshree Hospital
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}"> About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'services' %}">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'appointments' %}">Appointments</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'upload_prescription' %}">Medicine Delivery</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'lab_reports' %}">Lab Reports <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'contact' %}">Contact Us <span class="sr-only">(current)</span> </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- contact section -->
+  <section class="contact_section layout_padding">
+    <div class="container">
+      <div class="heading_container" data-aos="fade-down" data-aos-duration="1500">
+        <h2 id="getint">
+          Get In Touch
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="1500">
+          <div class="form_container contact-form">
+            <form method="POST" action="{% url 'contact' %}">
+              {% csrf_token %}
+              <div class="form-row">
+                  <div class="col-lg-6">
+                      <div>
+                          <input type="text" name="name" placeholder="Your Name" required />
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div>
+                          <input type="text" name="phone" placeholder="Phone Number" required />
+                      </div>
+                  </div>
+              </div>
+              <div>
+                  <br><input type="email" name="email" placeholder="Email" required />
+              </div>
+              <div>
+                  <br> <input type="text" name="message" class="message-box" placeholder="Message" required />
+              </div>
+              <div class="btn_box">
+                  <br><button type="submit">
+                      SEND
+                  </button>
+              </div>
+          </form>
+          
+          {% if messages %}
+            {% for message in messages %}
+              <p style="color: green;">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+          
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3801.7597062949626!2d75.34538487483682!3d17.66153638327315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc423000efb7c5f%3A0x1de6c08ff3a86d1c!2sMatoshree%20Hospital!5e0!3m2!1sen!2sin!4v1736424761351!5m2!1sen!2sin" width="100%" height="450" id="gmap" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-aos="fade-up" data-aos-duration="1500"></iframe>
+          </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-left" data-aos-duration="1500">
+          <div class="info-item d-flex">
+            <i class="bi bi-geo-alt flex-shrink-0" id="loca"></i>
+          
+
+          
+          </div><!-- End Info Item -->
+
+          
+          </div><!-- End Info Item -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="contact-grid">
+    <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <h3>Phone</h3>
+        <p>+91-9822 353 125</p>
+        <p>Emergency: +91 9922 884 556</p>
+    </div>
+    <div class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <h3>Email</h3>
+        <p>matoshreehospital83<br>@gmail.com</p>
+    </div>
+    <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <h3>Location</h3>
+        <p>Shivratna Nagar, Gopalpur</p>
+        <p>Maharashtra, India - 400001</p>
+    </div>
+    <div class="contact-card">
+        <div class="contact-icon">🕒</div>
+        <h3>Hours</h3>
+        <p>OPD: 9:00 AM - 8:00 PM</p>
+        <p>Emergency: 24/7</p>
+    </div>
+    </div>
+    <style>
+            /* Base Styles */
+    #getint{
+      
+      align-items: center;
+    }        
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(98, 210, 162, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(98, 210, 162, 0.3);
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(98, 210, 162, 0.3);
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #62d2a2;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+}
+
+.contact-card:hover::before {
+    transform: scaleX(1);
+}
+
+.contact-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #62d2a2;
+    transition: transform 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+    transform: scale(1.1);
+    animation: bounce 0.6s ease;
+}
+
+.contact-card h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.contact-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background-color: #62d2a2;
+    transition: width 0.3s ease;
+}
+
+.contact-card:hover h3::after {
+    width: 80px;
+}
+
+.contact-card p {
+    color: #666;
+    line-height: 1.6;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.contact-card:hover p {
+    color: #444;
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) scale(1.1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    
+    .contact-card {
+        padding: 25px 20px;
+    }
+}
+
+/* Fade-in animation for the entire grid */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-grid {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Staggered animation for cards */
+.contact-card:nth-child(1) { animation-delay: 0.1s; }
+.contact-card:nth-child(2) { animation-delay: 0.2s; }
+.contact-card:nth-child(3) { animation-delay: 0.3s; }
+.contact-card:nth-child(4) { animation-delay: 0.4s; }
+      </style>
+  <!-- end contact section -->
+   
+
+  <!-- footer section -->
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 footer_col">
+          <div class="footer_contact">
+            <h4>Reach at..</h4>
+            <div class="contact_link_box">
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>Location</span>
+              </a>
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>Call +01 1234567890</span>
+              </a>
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:enquiry.matoshreehospital@gmail.com">matoshreehospital@gmail.com</a>
+              </a>
+            </div>
+          </div>
+          <div class="footer_social">
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 footer_col">
+          <div class="footer_detail">
+            <h4>About Us</h4>
+            <p>
+              Matoshree Hospital is a leading healthcare institution dedicated to providing comprehensive medical services with a focus on patient care, innovation, and excellence. With a team of highly skilled doctors, nurses, and support staff, we ensure the highest standards of treatment and personalized care.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 mx-auto footer_col">
+          <div class="footer_link_box">
+            <h4>Links</h4>
+            <div class="footer_links">
+              <a href="{% url 'home' %}" data-aos="fade-left" data-aos-duration="1500">Home</a>
+              <a href="{% url 'about' %}" data-aos="fade-left" data-aos-duration="1500">About Us</a>
+              <a href="{% url 'services' %}" data-aos="fade-left" data-aos-duration="1500">Services</a>
+              <a href="{% url 'appointments' %}" data-aos="fade-left" data-aos-duration="1500">Appointments</a>
+              <a href="{% url 'upload_prescription' %}" data-aos="fade-left" data-aos-duration="1500">Medicine Delivery</a>
+              <a href="{% url 'lab_reports' %}" data-aos="fade-left" data-aos-duration="1500">Lab Reports</a>
+              <a href="{% url 'contact' %}" data-aos="fade-left" data-aos-duration="1500">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- custom js -->
+  <script type="text/javascript" src="js/custom.js"></script>
+  <!-- AOS animation library -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+</body>
+
+</html>

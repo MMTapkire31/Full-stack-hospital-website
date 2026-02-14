@@ -1,0 +1,1244 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Matoshree Hospital - About Us</title>
+  
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" /></head>
+  <style>
+    body { background-color: #e3f8f1; }
+    .about_section { animation: fadeInUp 1.5s ease-in-out; background-color: #ffffff; color: #000; padding: 50px 0; border-radius: 10px; }
+    .detail-box p { animation: fadeIn 2s ease-in-out; }
+    .img-box img { transition: transform 0.3s ease-in-out; border-radius: 10px; }
+    .img-box img:hover { transform: scale(1.05); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .team_section { background: #bff0da; padding: 50px 0; text-align: center; }
+    .team_member { padding: 20px; background: #62d2a2; color: white; border-radius: 10px; transition: 0.3s; }
+    .team_member:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+
+   /* Blog Section Styling */
+.blog_section {
+  background-color: #e3f8f1; /* Light greenish background */
+  padding: 50px 0;
+  text-align: center;
+  animation: fadeInUp 1.5s ease-in-out;
+}
+
+/* Blog Table */
+.blog_table {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-spacing: 30px 40px; /* Increase spacing: 30px horizontal, 40px vertical */
+}
+
+/* Blog Post Box */
+.blog_post {
+  background: #f5f5f5; /* Neutral background */
+  color: black;
+  padding: 30px; /* Increased padding */
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  animation: fadeIn 2s ease-in-out;
+  margin-bottom: 40px; /* Extra spacing between rows */
+}
+
+/* Hover Effect */
+.blog_post:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Blog Titles */
+.blog_post h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Blog Text */
+.blog_post p {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Read More Button */
+.blog_post a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: white;
+  color: #62d2a2;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Hover Effect on Read More */
+.blog_post a:hover {
+  background: #47b58f;
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body {
+  font-family: Arial, sans-serif;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #ffffff;
+  color: black;
+}
+
+.blog-slider-section {
+  background: #62d2a2;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.blog-card {
+  background: white;
+  color: black;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.blog-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.read-more {
+  background: #62d2a2;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.read-more:hover {
+  background: #48b68a;
+}
+
+  </style>
+
+
+
+<body class="sub_page">
+  <div class="hero_area">
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="{% url 'home' %}"><span>Matoshree Hospital</span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+              <li class="nav-item active"><a class="nav-link" href="{% url 'about' %}"> About Us<span class="sr-only">(current)</span> </a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'appointments' %}">Appointments</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'upload_prescription' %}">Medicine Delivery</a></li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'lab_reports' %}">Lab Reports <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{% static 'images/about-img.jpg' %}" alt="About Image" class="about_img">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>About <span>Us</span></h2>
+            </div>
+            <p>
+              Matoshree Hospital is a beacon of excellence in healthcare, committed to providing compassionate and cutting-edge medical services. With a legacy of trust and innovation, we prioritize patient well-being above all.
+            </p>
+            <ul class="about_list">
+              <li><i class="fa fa-medkit"></i> <strong>24/7 Emergency Care:</strong> Always ready to serve in critical situations.</li>
+              <li><i class="fa fa-stethoscope"></i> <strong>Specialized Departments:</strong> Cardiology, Neurology, Orthopedics, and more.</li>
+              <li><i class="fa fa-laptop-medical"></i> <strong>State-of-the-Art Facilities:</strong> Equipped with modern medical technology.</li>
+              <li><i class="fa fa-user-md"></i> <strong>Expert Medical Team:</strong> Highly qualified doctors and dedicated staff.</li>
+              <li><i class="fa fa-heart"></i> <strong>Holistic Healthcare:</strong> Personalized patient care and wellness programs.</li>
+            </ul>
+            <p>
+              "Your Health, Our Mission" drives us to ensure every patient receives the highest quality care in a supportive and comfortable environment. Experience healthcare with a human touch at Matoshree Hospital.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+  
+  <section class="philosophy_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="philosophy_box">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h4>Our Philosophy</h4>
+            <p>To provide compassionate healthcare services with utmost quality and dedication.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="philosophy_box">
+            <i class="fas fa-balance-scale"></i>
+            <h4>Our Vision</h4>
+            <p>To be recognized as the leader in healthcare through compassionate care and quality service.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="philosophy_box">
+            <i class="fas fa-thumbs-up"></i>
+            <h4>Our Values</h4>
+            <p>We are committed to upholding the highest standards of honesty, transparency.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="philosophy_box">
+            <i class="fas fa-cogs"></i>
+            <h4>Our Mission</h4>
+            <p>To offer comprehensive healthcare services in an environment focused on safety, care, and excellence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style>
+  /* About Us Section */
+  .about_us_section {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+  }
+  
+  .about_us_section h2 {
+    font-size: 36px;
+    color: #333;
+    text-align: left;
+  }
+  
+  .about_us_section p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  /* Philosophy Section */
+  .philosophy_section {
+    padding: 50px 0;
+    background-color: #ffffff;
+  }
+  
+  .philosophy_section .philosophy_box {
+    background-color: #e2f7f3;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .philosophy_section .philosophy_box:hover {
+    background-color: #62d2a2;
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .philosophy_section .philosophy_box i {
+    font-size: 36px;
+    color: #62d2a2;
+    margin-bottom: 15px;
+  }
+  
+  .philosophy_section .philosophy_box h4 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .philosophy_section .philosophy_box p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 767px) {
+    .about_us_section {
+      padding: 30px 15px;
+    }
+  
+    .philosophy_section .philosophy_box {
+      margin-bottom: 30px;
+    }
+  }
+</style>
+    
+ 
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+     /* About Section Styling */
+     .about_section {
+      padding: 50px 0;
+      background-color: #f9f9f9;
+    }
+  
+    .about_img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+  
+    .detail-box {
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+  
+    .heading_container h2 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+  
+    .heading_container h2 span {
+      color: #62d2a2;
+    }
+  
+    .about_list {
+      list-style: none;
+      padding: 0;
+    }
+  
+    .about_list li {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #555;
+      display: flex;
+      align-items: center;
+    }
+  
+    .about_list li i {
+      font-size: 24px;
+      color: #62d2a2;
+      margin-right: 15px;
+    }
+  
+    .about_list li strong {
+      font-weight: bold;
+      color: #333;
+    }
+  
+    /* Team Section Styling */
+    .team_section {
+      padding: 50px 0;
+      background-color: #f8f8f8;
+    }
+  
+    .section_title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+      color: #333;
+    }
+  
+    /* Team Member Styling */
+    .team_member {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      margin-bottom: 30px;
+    }
+  
+    /* Adding Corner Colors */
+    .team_member::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #62d2a2;
+      border-radius: 50%;
+    }
+  
+    .team_member::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #62d2a2;
+      border-radius: 50%;
+    }
+  
+    .team_member_icon {
+      background-color: #62d2a2;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 36px;
+    }
+  
+    .team_member h4 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+  
+    .team_member p {
+      font-size: 16px;
+      color: #666;
+    }
+  
+    .team_bio {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #888;
+    }
+  
+    .team_member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+  
+    .team_member:hover .team_member_icon {
+      background-color: #48a47b;
+    }
+  
+    /* Unique Animation for Team Members */
+    .team_member {
+      opacity: 0;
+      animation: fadeInUp 0.5s forwards;
+    }
+  
+    .team_member:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+  
+    .team_member:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+  
+    .team_member:nth-child(3) {
+      animation-delay: 0.9s;
+    }
+  
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    /* Responsive Design */
+    @media (max-width: 767px) {
+      .team_member {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+  
+  
+  <style>
+    /* Container for the blog section */
+    .blog_section {
+      padding: 50px 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .section_title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Blog Posts Grid */
+    .blog_container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .blog_post {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .blog_post:hover {
+      transform: translateY(-10px);
+    }
+
+    .blog_post h3 {
+      font-size: 24px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .blog_post h3 i {
+      margin-right: 10px;
+      font-size: 28px;
+      color: #62d2a2;
+    }
+
+    .blog_post p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .read_more {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .read_more:hover {
+      text-decoration: underline;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .modal_content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 800px;
+      border-radius: 12px;
+    }
+
+    .close_btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close_btn:hover,
+    .close_btn:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Styling for Icons in Detailed Description */
+    .icon {
+      color: #62d2a2;
+      margin-right: 10px;
+      font-size: 20px;
+    }
+
+    .detailed_content {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .detailed_content ul {
+      margin-top: 10px;
+    }
+
+    .detailed_content ul li {
+      margin: 10px 0;
+    }
+
+    .detailed_content i {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blog Section -->
+  <section class="blog_section">
+    <div class="container">
+      <h2 class="section_title">Latest Blog</h2>
+      <div class="blog_container">
+        <!-- Blog 1 -->
+        <div class="blog_post" data-id="1">
+          <h3><i class="fa fa-heartbeat"></i> 4 Tips for a Healthy Heart</h3>
+          <p>Maintaining a healthy heart requires a balanced diet, regular exercise, stress management, and routine check-ups. Learn how small lifestyle changes can significantly improve heart health.</p>
+          <a href="#" class="read_more" data-id="1">Read More</a>
+        </div>
+
+        <!-- Blog 2 -->
+        <div class="blog_post" data-id="2">
+          <h3><i class="fa fa-exclamation-circle icon"></i> Understanding Neurological Disorders</h3>
+          <p>Neurological disorders affect millions worldwide. Early diagnosis and timely treatment can improve the quality of life. Discover common symptoms and treatment options.</p>
+          <a href="#" class="read_more" data-id="2">Read More</a>
+        </div>
+
+        <!-- Blog 3 -->
+        <div class="blog_post" data-id="3">
+          <h3><i class="fa fa-user-md icon"></i> Advancements in Orthopedic Surgery</h3>
+          <p>With the latest innovations in orthopedic surgery, patients experience faster recovery and improved mobility. Explore how modern techniques are transforming orthopedic care.</p>
+          <a href="#" class="read_more" data-id="3">Read More</a>
+        </div>
+
+        <!-- Blog 4 -->
+        <div class="blog_post" data-id="4">
+          <h3><i class="fa fa-stethoscope"></i> The Importance of Regular Health Checkups</h3>
+          <p>Regular health checkups can help detect health issues early and prevent serious complications. Learn why it’s essential to stay on top of your health.</p>
+          <a href="#" class="read_more" data-id="4">Read More</a>
+        </div>
+
+        <!-- Blog 5 -->
+        <div class="blog_post" data-id="5">
+          <h3><i class="fa fa-ambulance"></i> Emergency Medical Services Explained</h3>
+          <p>Emergency medical services (EMS) are critical in saving lives. Understanding the role of EMS, their response protocols, and how to access them can be vital in urgent situations.</p>
+          <a href="#" class="read_more" data-id="5">Read More</a>
+        </div>
+
+        <!-- Blog 6 -->
+        <div class="blog_post" data-id="6">
+          <h3><i class="fa fa-cogs icon"></i> Innovations in Hospital Management</h3>
+          <p>Hospital management has seen significant innovations, including the use of technology for patient care, hospital administration, and healthcare management. Learn about the latest advancements in this field.</p>
+          <a href="#" class="read_more" data-id="6">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Structure for Detailed View -->
+  <div id="blogModal" class="modal">
+    <div class="modal_content">
+      <span class="close_btn">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <div id="modalContent" class="detailed_content"></div>
+    </div>
+  </div>
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("blogModal");
+
+    // Get all "Read More" buttons
+    var readMoreButtons = document.querySelectorAll(".read_more");
+
+    // Get the modal content
+    var modalTitle = document.getElementById("modalTitle");
+    var modalContent = document.getElementById("modalContent");
+
+    // Get the close button
+    var closeBtn = document.querySelector(".close_btn");
+
+    // Add event listener to each "Read More" button
+    readMoreButtons.forEach(function(button) {
+      button.addEventListener("click", function(event) {
+        event.preventDefault();
+        
+        // Get the blog ID
+        var blogId = event.target.getAttribute("data-id");
+
+        // Display detailed blog content based on blog ID
+        var detailedContent = getBlogDetails(blogId);
+        modalTitle.innerText = detailedContent.title;
+        modalContent.innerHTML = detailedContent.content;
+
+        // Show the modal
+        modal.style.display = "block";
+      });
+    });
+
+    // Function to get blog details (can be dynamically replaced)
+    function getBlogDetails(id) {
+      var blogDetails = {
+        1: { 
+          title: "4 Tips for a Healthy Heart", 
+          content: `
+            <p><i class="fa fa-heart icon"></i><strong>Tip 1:</strong> Eat a balanced diet including healthy fats, fiber, and antioxidants.</p>
+            <p><i class="fa fa-running icon"></i><strong>Tip 2:</strong> Exercise regularly to strengthen the heart and improve circulation.</p>
+            <p><i class="fa fa-stethoscope icon"></i><strong>Tip 3:</strong> Visit your healthcare provider for regular checkups and blood pressure monitoring.</p>
+            <p><i class="fa fa-smoking-ban icon"></i><strong>Tip 4:</strong> Avoid smoking and excessive alcohol consumption to protect heart health.</p>
+          `
+        },
+        2: { 
+          title: "Understanding Neurological Disorders", 
+          content: `
+            <p><i class="fa fa-brain icon"></i><strong>What are neurological disorders?</strong> These are conditions that affect the brain, spine, and nerves. Examples include epilepsy, Alzheimer's, and Parkinson's disease.</p>
+            <p><i class="fa fa-exclamation-circle icon"></i><strong>Early Symptoms:</strong> Symptoms may include memory loss, seizures, difficulty in speaking, or muscle weakness.</p>
+            <p><i class="fa fa-stethoscope icon"></i><strong>Diagnosis:</strong> Diagnosis typically involves neurological exams, imaging tests like MRI, and blood tests.</p>
+            <p><i class="fa fa-pills icon"></i><strong>Treatment:</strong> Treatment may include medication, therapy, surgery, or lifestyle changes to manage symptoms and improve quality of life.</p>
+          `
+        },
+        3: { 
+          title: "Advancements in Orthopedic Surgery", 
+          content: `
+            <p><i class="fa fa-user-md icon"></i><strong>Minimally invasive surgeries:</strong> New surgical techniques such as arthroscopy offer faster recovery and less post-operative pain.</p>
+            <p><i class="fa fa-bone icon"></i><strong>Robotic-assisted surgeries:</strong> Robots are being used for more precise surgeries, reducing complications and improving recovery.</p>
+            <p><i class="fa fa-stethoscope icon"></i><strong>Stem cell therapy:</strong> This cutting-edge technique is used to treat damaged joints and tissues, providing faster healing and better mobility.</p>
+            <p><i class="fa fa-calendar-check icon"></i><strong>Faster recovery:</strong> Innovations in post-operative care, including physical therapy, speed up the healing process significantly.</p>
+          `
+        },
+        4: { 
+          title: "The Importance of Regular Health Checkups", 
+          content: `
+            <p><i class="fa fa-stethoscope icon"></i><strong>Why Regular Checkups Matter:</strong> Regular visits to the doctor allow for early detection of diseases, saving lives and preventing long-term issues.</p>
+            <p><i class="fa fa-heart icon"></i><strong>Screening for Heart Disease:</strong> Early blood pressure and cholesterol tests can help detect heart issues before they become severe.</p>
+            <p><i class="fa fa-dna icon"></i><strong>Screening for Cancer:</strong> Routine cancer screenings can help detect early signs, leading to more effective treatments.</p>
+            <p><i class="fa fa-bone icon"></i><strong>Preventive Measures:</strong> Health checkups often include immunizations and lifestyle advice to help maintain optimal health.</p>
+          `
+        },
+        5: { 
+          title: "Emergency Medical Services Explained", 
+          content: `
+            <p><i class="fa fa-ambulance icon"></i><strong>What is EMS?</strong> Emergency Medical Services provide urgent medical care and transportation for individuals experiencing acute illness or injury.</p>
+            <p><i class="fa fa-clock icon"></i><strong>Fast Response:</strong> EMS teams are trained to arrive quickly, often within minutes, to offer medical intervention before transporting patients.</p>
+            <p><i class="fa fa-phone icon"></i><strong>Accessing EMS:</strong> You can call emergency services through 911 or the local emergency number for quick assistance in case of life-threatening situations.</p>
+            <p><i class="fa fa-hospital icon"></i><strong>Role of Paramedics:</strong> Paramedics are highly trained professionals who provide medical care in emergencies, including life-saving procedures.</p>
+          `
+        },
+        6: { 
+          title: "Innovations in Hospital Management", 
+          content: `
+            <p><i class="fa fa-laptop-medical icon"></i><strong>Telemedicine:</strong> The use of technology in hospitals allows for remote patient consultations and monitoring.</p>
+            <p><i class="fa fa-users icon"></i><strong>Staff Efficiency:</strong> Modern hospital management systems streamline patient care, improve staff efficiency, and enhance patient experience.</p>
+            <p><i class="fa fa-chart-line icon"></i><strong>Data Analytics:</strong> Hospitals are using data analytics to predict patient needs, optimize resource allocation, and improve outcomes.</p>
+            <p><i class="fa fa-cogs icon"></i><strong>Automation:</strong> Automated systems for patient scheduling, billing, and inventory management reduce errors and improve operational efficiency.</p>
+          `
+        },
+      };
+      
+      return blogDetails[id] || { title: "Blog not found", content: "<p>No details available.</p>" };
+    }
+
+    // Close the modal when the close button is clicked
+    closeBtn.addEventListener("click", function() {
+      modal.style.display = "none";
+    });
+
+    // Close the modal if the user clicks anywhere outside the modal
+    window.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+      
+  <section class="team_section">
+    <div class="container">
+      <h2 class="section_title">Meet Our Experts</h2>
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="team_member">
+            <div class="team_member_icon">
+              <i class="fa fa-user-md"></i>
+            </div>
+            <h4>Dr. A. Bansode</h4>
+            <p class="team_bio">Dr. A. Bansode has over 5 years of experience in treating diseases, offering specialized care to each patient.</p>
+          </div>
+        </div>
+  
+      
+        <div class="col-md-4">
+          <div class="team_member">
+            <div class="team_member_icon">
+              <i class="fa fa-brain"></i>
+            </div>
+            <h4>Dr. S. Bansode</h4>
+            {% comment %} <p>Neurologist</p> {% endcomment %}
+            <p class="team_bio">With a focus on disorders, Dr. S. Bansode helps patients manage complex conditions with precision.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="team_member">
+            <div class="team_member_icon">
+              <i class="fa fa-bone"></i>
+            </div>
+            <h4>Dr. R. Khanna</h4>
+            <p class="team_bio">Dr. R. Khanna specializes in minimally invasive surgery techniques for orthopedic issues and joint replacement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+  
+<!-- Hospital Image Display Section -->
+<section class="image_display_section layout_padding" style="background-color: white;">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>Our Hospital</h2>
+    </div>
+    
+    <div class="hospital-feature-container">
+      <!-- Left Side Features -->
+      <div class="hospital-features left-features">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fa fa-heartbeat" aria-hidden="true"></i>
+          </div>
+          <h4>Compassionate Care</h4>
+          <p>Patient-centered approach with empathy</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+          </div>
+          <h4>Expert Specialists</h4>
+          <p>Highly qualified medical professionals</p>
+        </div>
+      </div>
+      
+      <!-- Main Hospital Image -->
+      <div class="hospital_image_container">
+        <div class="img-box">
+          <img src="{% static 'images/h1.png' %}" alt="Matoshree Hospital" class="hospital-main-image">
+          <div class="image-caption">
+            <h3>Our Hospital</h3>
+            <p>Welcome to our healthcare facility</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side Features -->
+      <div class="hospital-features right-features">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fa fa-medkit" aria-hidden="true"></i>
+          </div>
+          <h4> First Aid & Trauma Care</h4>
+          <p>Cutting-edge medical equipment</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">
+            <i class="fa fa-clock" aria-hidden="true"></i>
+          </div>
+          <h4>24/7 Emergency</h4>
+          <p>Always ready to serve you</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    /* Equal height columns */
+    .equal-height {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .img-column, .content-column {
+      display: flex;
+    }
+    
+    .img-box, .detail-box {
+      width: 100%;
+    }
+    
+    /* Original styling with adjustments for equal height */
+    .about_section {
+      padding: 50px 0;
+      background-color: #ffffff;
+      color: #000;
+    }
+    
+    .about_img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .img-box:hover .about_img {
+      transform: scale(1.02);
+    }
+    
+    .detail-box {
+      padding: 20px;
+      height: 100%;
+    }
+    
+    .heading_container h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    .heading_container h2 span {
+      color: #62d2a2;
+    }
+    
+    .about_list {
+      padding-left: 0;
+      list-style: none;
+      margin: 20px 0;
+    }
+    
+    .about_list li {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .about_list i {
+      color: #62d2a2;
+      margin-right: 10px;
+      font-size: 20px;
+      min-width: 25px;
+    }
+    
+    @media (max-width: 767px) {
+      .equal-height {
+        flex-direction: column;
+      }
+      
+      .img-column {
+        height: 300px; /* Fixed height on mobile */
+        margin-bottom: 20px;
+      }
+    }
+  .image_display_section {
+    padding: 50px 0;
+    background-color: white;
+  }
+  
+  .hospital-feature-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .hospital_image_container {
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    flex: 1 0 500px;
+  }
+  
+  .hospital-features {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .feature-item {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+  
+  .feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    background: #f1f8f5;
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    color: #62d2a2;
+    margin-bottom: 15px;
+  }
+  
+  .feature-item h4 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .feature-item p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0;
+  }
+  
+  .img-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .hospital-main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: all 0.5s ease;
+    transform-origin: center center;
+  }
+  
+  .img-box:hover .hospital-main-image {
+    transform: scale(1.03);
+    filter: brightness(1.02);
+  }
+  
+  .image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    color: white;
+    padding: 30px 20px 20px;
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+  
+  .image-caption h3 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  }
+  
+  .image-caption p {
+    font-size: 1rem;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+  
+  /* Animation for initial load */
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .hospital-main-image {
+    animation: fadeInScale 1s ease-out forwards;
+  }
+  
+  /* Feature animations */
+  .left-features .feature-item {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+  
+  .right-features .feature-item {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+  
+  .left-features .feature-item:nth-child(2),
+  .right-features .feature-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @media (max-width: 1200px) {
+    .hospital-feature-container {
+      flex-direction: column;
+    }
+    
+    .hospital-features {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .feature-item {
+      flex: 1 0 40%;
+      min-width: 200px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .image-caption h3 {
+      font-size: 1.4rem;
+    }
+    
+    .image-caption p {
+      font-size: 0.9rem;
+    }
+    
+    .feature-item {
+      flex: 1 0 100%;
+    }
+    
+    .feature-icon {
+      font-size: 2rem;
+    }
+    
+    .feature-item h4 {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+  
+
+<footer class="footer_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-3 footer_col">
+        <div class="footer_contact">
+          <h4>Reach at..</h4>
+          <div class="contact_link_box">
+            <a href="#" data-aos="fade-right" data-aos-duration="1500">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>Location</span>
+            </a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>Call +01 1234567890</span>
+            </a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:enquiry.matoshreehospital@gmail.com">matoshreehospital@gmail.com</a>
+            </a>
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-md-6 col-lg-3 footer_col">
+        <div class="footer_detail">
+          <h4>About</h4>
+          <p>
+            Matoshree Hospital is a leading healthcare institution dedicated to providing comprehensive medical services with a focus on patient care, innovation, and excellence. With a team of highly skilled doctors, nurses, and support staff, we ensure the highest standards of treatment and personalized care.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-2 mx-auto footer_col">
+        <div class="footer_link_box">
+          <h4>Links</h4>
+          <div class="footer_links">
+            <a href="{% url 'home' %}" data-aos="fade-left" data-aos-duration="1500">Home</a>
+            <a href="{% url 'about' %}" data-aos="fade-left" data-aos-duration="1500">About Us</a>
+            <a href="{% url 'services' %}" data-aos="fade-left" data-aos-duration="1500">Services</a>
+            <a href="{% url 'appointments' %}" data-aos="fade-left" data-aos-duration="1500">Appointments</a>
+            <a href="{% url 'upload_prescription' %}" data-aos="fade-left" data-aos-duration="1500">Medicine Delivery</a>
+            <a href="{% url 'lab_reports' %}" data-aos="fade-left" data-aos-duration="1500">Lab Reports</a>
+            <a href="{% url 'contact' %}" data-aos="fade-left" data-aos-duration="1500">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer section -->
+
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

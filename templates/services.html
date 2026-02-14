@@ -1,0 +1,1080 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
+
+  <title> Matoshree Hospital - Our Services</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Owl Slider Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+  
+  <!-- AOS animation -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+  <style>
+    /* Default Service Box Style */
+    .service-box {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+      height: 80%;
+    }
+
+    /* Hover Effect: Scale up and Shadow */
+    .service-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Icon Style */
+    .service-box .img-box {
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      height: 70px;
+      width: 70px;
+      background-color: #007bff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .service-box:hover .img-box {
+      background-color: #0056b3;
+      transform: rotate(10deg);
+    }
+
+    .service-box .img-box i {
+      font-size: 30px;
+      color: white;
+    }
+
+    .service-box h5 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .service-box p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .service-box .btn {
+      margin-top: 15px;
+      background-color: #007bff;
+      color: white; 
+      padding: 8px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .service-box .btn:hover {
+      background-color: #0056b3;
+      transform: translateX(5px);
+    }
+
+    .heading_container h2 {
+      font-size: 40px;
+      color: #333;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .heading_container h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: #007bff;
+    }
+
+    .heading_container p {
+      font-size: 18px;
+      color: #777;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    
+    /* Modal Styles */
+    .service-modal .modal-header {
+      background-color: #007bff;
+      color: white;
+      border-radius: 0;
+    }
+    
+    .service-modal .modal-title {
+      font-weight: 600;
+    }
+    
+    .service-modal .modal-body {
+      padding: 25px;
+    }
+    
+    .service-modal .service-icon {
+      font-size: 50px;
+      color: #007bff;
+      margin-bottom: 20px;
+      display: block;
+      text-align: center;
+    }
+    
+    .service-modal .service-features {
+      margin: 25px 0;
+    }
+    
+    .service-modal .feature-item {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .service-modal .feature-item i {
+      color: #28a745;
+      margin-right: 10px;
+    }
+    
+    .service-modal .modal-footer .btn-primary {
+      background-color: #007bff;
+    }
+    
+    /* Feature banner */
+    .service-featured {
+      background-color: #f0f8ff;
+      padding: 50px 0;
+      margin: 50px 0;
+    }
+    
+    .service-featured .content {
+      display: flex;
+      align-items: center;
+    }
+    
+    .service-featured .text {
+      flex: 1;
+      padding: 0 30px;
+    }
+    
+    .service-featured .image {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .service-featured img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .service-featured h3 {
+      color: #007bff;
+      margin-bottom: 20px;
+      font-size: 30px;
+    }
+    
+    .service-count {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #007bff;
+      color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    /* Service category labels */
+    .service-category {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #28a745;
+      color: white;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 0 0 10px 0;
+    }
+    
+    /* Search bar */
+    .service-search {
+      margin-bottom: 30px;
+    }
+    
+    .service-search input {
+      padding: 10px 15px;
+      border-radius: 30px;
+      border: 1px solid #ddd;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* Section divider */
+    .section-divider {
+      height: 2px;
+      background: linear-gradient(to right, transparent, #007bff, transparent);
+      margin: 50px 0;
+    }
+    
+    /* Testimonial slider */
+    .testimonial-slider {
+      padding: 40px 0;
+      background-color: #f9f9f9;
+      margin-bottom: 50px;
+    }
+    
+    .testimonial-item {
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .testimonial-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: block;
+    }
+    
+    .testimonial-item p {
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+    
+    .testimonial-item .name {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="images/hero-bg.png" alt="">
+    </div>
+
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              Matoshree Hospital
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}"> About Us</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'services' %}">Services <span class="sr-only">(current)</span> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'appointments' %}">Appointments</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'upload_prescription' %}">Medicine Delivery</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'lab_reports' %}">Lab Reports <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+<br>
+<br>
+  <!-- Search bar -->
+  <div class="container service-search" data-aos="fade-up">
+    <div class="row">
+      <div class="col-md-12 text-center" >
+        <input type="text" id="serviceSearch" placeholder="Search for services..." onkeyup="searchServices()">
+      </div>
+    </div>
+  </div>
+
+  <!-- featured service banner -->
+  <section class="service-featured" data-aos="fade-up">
+    <div class="container">
+      <div class="row content">
+        <div class="col-md-6 text">
+          <h3  id="h">Healthcare at Your Fingertips</h3>
+          <p>At Matoshree Hospital, we bring together cutting-edge medical technology and compassionate care to provide you with the best healthcare experience. Our team of specialists is dedicated to your well-being and recovery.</p>
+          <p>From routine check-ups to complex surgeries, we offer comprehensive healthcare solutions tailored to your needs.</p>
+        </div>
+        <div class="col-md-6 image">
+          <img src="{% static 'images/services.png' %}"  alt="Advanced Healthcare Services">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- department section -->
+  <section class="department_section layout_padding">
+    <div class="department_container">
+      <div class="container">
+        <div class="heading_container heading_center" data-aos="fade-up">
+          <h2>
+            Our Services
+          </h2>
+          <p>
+            Matoshree Hospital offers a comprehensive range of healthcare services with a focus on quality, compassion, and your well-being. Our expert team is dedicated to providing personalized care for you and your family.
+          </p>
+        </div>
+        
+        <h3 class="text-center mb-4" data-aos="fade-up">Primary Services</h3>
+        
+        <div class="row">
+          <!-- First Row: 4 Services -->
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="emergency">
+              <span class="service-count">1</span>
+              <span class="service-category">Emergency</span>
+              <div class="img-box">
+                <i class="fa fa-heartbeat" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  24/7 Emergency Care
+                </h5>
+                <p>
+                  Always ready to provide you with immediate critical care, day or night, with a dedicated emergency response team.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="diagnosis">
+              <span class="service-count">2</span>
+              <span class="service-category">Testing</span>
+              <div class="img-box">
+                <i class="fa fa-stethoscope" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Advanced Diagnostics
+                </h5>
+                <p>
+                  Comprehensive diagnostic services using state-of-the-art technology for accurate and timely results to guide your treatment.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="surgery">
+              <span class="service-count">3</span>
+              <span class="service-category">Surgical</span>
+              <div class="img-box">
+                <i class="fa fa-ambulance" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Surgical Excellence
+                </h5>
+                <p>
+                  Cutting-edge surgical services with a focus on minimally invasive procedures, enhanced recovery protocols, and patient safety.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="firstaid">
+              <span class="service-count">4</span>
+              <span class="service-category">Emergency</span>
+              <div class="img-box">
+                <i class="fa fa-medkit" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  First Aid & Trauma Care
+                </h5>
+                <p>
+                  Expert immediate response to injuries and medical emergencies with specialized trauma protocols and equipment.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+        <h3 class="text-center mb-4" data-aos="fade-up">Specialized Care</h3>
+
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="pediatric">
+              <span class="service-count">5</span>
+              <span class="service-category">Children</span>
+              <div class="img-box">
+                <i class="fa fa-child" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Pediatric Care
+                </h5>
+                <p>
+                  Compassionate care for children of all ages, focusing on their unique healthcare needs with child-friendly facilities.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="centered">
+              <span class="service-count">6</span>
+              <span class="service-category">Approach</span>
+              <div class="img-box">
+                <i class="fa fa-users" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Patient-Centered Care
+                </h5>
+                <p>
+                  Personalized treatment plans that respect your preferences, involve you in decision-making, and focus on your overall well-being.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="cardiology">
+              <span class="service-count">7</span>
+              <span class="service-category">Heart</span>
+              <div class="img-box">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Cardiology Services
+                </h5>
+                <p>
+                  Comprehensive heart care including diagnostics, interventions, and rehabilitation programs led by experienced cardiologists.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="orthopedic">
+              <span class="service-count">8</span>
+              <span class="service-category">Bone</span>
+              <div class="img-box">
+                <i class="fa fa-wheelchair" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Orthopedic Treatment
+                </h5>
+                <p>
+                  Expert care for bone and joint conditions, including sports injuries, arthritis, and rehabilitation services.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+        <h3 class="text-center mb-4" data-aos="fade-up">Additional Services</h3>
+
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="neurology">
+              <span class="service-count">9</span>
+              <span class="service-category">Brain</span>
+              <div class="img-box">
+                <i class="fa fa-medkit" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Neurology Care
+                </h5>
+                <p>
+                  Advanced diagnosis and treatment for neurological disorders with cutting-edge technology and specialized expertise.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="gynecology">
+              <span class="service-count">10</span>
+              <span class="service-category">Women</span>
+              <div class="img-box">
+                <i class="fa fa-female" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Gynecology & Obstetrics
+                </h5>
+                <p>
+                  Comprehensive women's health services from routine check-ups to specialized treatments and maternity care.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="mental">
+              <span class="service-count">11</span>
+              <span class="service-category">Mental</span>
+              <div class="img-box">
+                <i class="fa fa-comments" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Mental Health Services
+                </h5>
+                <p>
+                  Supportive care for mental wellbeing through counseling, therapy, and psychiatric services in a compassionate environment.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="box service-box" data-aos="fade-up" data-service="rehab">
+              <span class="service-count">12</span>
+              <span class="service-category">Recovery</span>
+              <div class="img-box">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  Rehabilitation Services
+                </h5>
+                <p>
+                  Comprehensive physical, occupational, and speech therapy programs to help you regain independence and functionality.
+                </p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end department section -->
+
+ <!-- Include Font Awesome in the <head> of your HTML -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Testimonial section -->
+<section class="testimonial-slider">
+  <div class="container">
+    <h3 class="text-center mb-4">What Our Patients Say</h3>
+    <div class="owl-carousel testimonial-carousel">
+      
+      <div class="testimonial-item text-center">
+        <i class="fas fa-user-circle fa-5x mb-3"></i>
+        <p>"The emergency care at Matoshree Hospital saved my life. The doctors responded quickly and provided excellent treatment."</p>
+        <div class="name">Rajesh Sharma</div>
+      </div>
+      
+      <div class="testimonial-item text-center">
+        <i class="fas fa-user-circle fa-5x mb-3"></i>
+        <p>"I had my surgery here and the care was exceptional. The staff was attentive and the facilities are world-class."</p>
+        <div class="name">Priya Patel</div>
+      </div>
+      
+      <div class="testimonial-item text-center">
+        <i class="fas fa-user-circle fa-5x mb-3"></i>
+        <p>"The pediatric department took wonderful care of my child. The doctors were kind and explained everything clearly."</p>
+        <div class="name">Anita Desai</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 footer_col">
+          <div class="footer_contact">
+            <h4>Reach at..</h4>
+            <div class="contact_link_box">
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>Location</span>
+              </a>
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>Call +01 1234567890</span>
+              </a>
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:enquiry.matoshreehospital@gmail.com">matoshreehospital@gmail.com</a>
+              </a>
+            </div>
+          </div>
+          <div class="footer_social">
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 footer_col">
+          <div class="footer_detail">
+            <h4>About Us</h4>
+            <p>
+              Matoshree Hospital is a leading healthcare institution dedicated to providing comprehensive medical services with a focus on patient care, innovation, and excellence. With a team of highly skilled doctors, nurses, and support staff, we ensure the highest standards of treatment and personalized care.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 mx-auto footer_col">
+          <div class="footer_link_box">
+            <h4>Links</h4>
+            <div class="footer_links">
+              <a href="{% url 'home' %}" data-aos="fade-left" data-aos-duration="1500">Home</a>
+              <a href="{% url 'about' %}" data-aos="fade-left" data-aos-duration="1500">About Us</a>
+              <a href="{% url 'services' %}" data-aos="fade-left" data-aos-duration="1500">Services</a>
+              <a href="{% url 'appointments' %}" data-aos="fade-left" data-aos-duration="1500">Appointments</a>
+              <a href="{% url 'upload_prescription' %}" data-aos="fade-left" data-aos-duration="1500">Medicine Delivery</a>
+              <a href="{% url 'lab_reports' %}" data-aos="fade-left" data-aos-duration="1500">Lab Reports</a>
+              <a href="{% url 'contact' %}" data-aos="fade-left" data-aos-duration="1500">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+  <!-- footer section -->
+
+  <!-- Service Detail Modals -->
+  <!-- Emergency Care Modal -->
+  <div class="modal fade service-modal" id="emergencyModal" tabindex="-1" role="dialog" aria-labelledby="emergencyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="emergencyModalLabel">24/7 Emergency Care</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i class="fa fa-heartbeat service-icon" aria-hidden="true"></i>
+          <p>Our 24/7 Emergency Care department is equipped to handle any medical crisis with speed and expertise. Our emergency response team includes experienced physicians, nurses, and support staff who are trained to provide immediate care for critical conditions.</p>
+          
+          <div class="service-features">
+            <h5>Key Features:</h5>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Round-the-clock emergency services</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Advanced life support ambulances</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Trauma care specialists</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Critical care units</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Seamless transition to inpatient care</div>
+          </div>
+          
+          <p>Our emergency department is designed to provide efficient care with minimal waiting times. We prioritize cases based on severity and ensure that every patient receives the attention they need without unnecessary delay.</p>
+          
+          <p>For medical emergencies, please call our emergency hotline at <strong>+01 1234567890</strong> or proceed directly to our emergency department.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Book Appointment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Diagnosis Modal -->
+  <div class="modal fade service-modal" id="diagnosisModal" tabindex="-1" role="dialog" aria-labelledby="diagnosisModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="diagnosisModalLabel">Advanced Diagnostics</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i class="fa fa-stethoscope service-icon" aria-hidden="true"></i>
+          <p>Our Advanced Diagnostics department is equipped with state-of-the-art technology to provide accurate and timely diagnosis. We offer a comprehensive range of diagnostic services that help our physicians determine the most effective treatment plans.</p>
+          
+          <div class="service-features">
+            <h5>Available Diagnostic Services:</h5>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Advanced imaging (MRI, CT, Ultrasound)</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Laboratory testing</div>
+            <div class="feature<div class="feature-item"><i class="fa fa-check-circle"></i> Laboratory testing</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Pathology services</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Cardiac diagnostics (ECG, Echo, Stress tests)</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Neurological diagnostics (EEG, EMG)</div>
+          </div>
+          
+          <p>Our diagnostic services are available both for inpatients and outpatients. We prioritize quick turnaround times for test results to ensure timely treatment decisions. Our experienced technicians and specialists ensure the highest accuracy in all diagnostic procedures.</p>
+          
+          <p>For diagnostic appointments, please contact our scheduling desk at <strong>+01 1234567890</strong> or book online through our patient portal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Book Appointment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Surgery Modal -->
+  <div class="modal fade service-modal" id="surgeryModal" tabindex="-1" role="dialog" aria-labelledby="surgeryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="surgeryModalLabel">Surgical Excellence</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i class="fa fa-ambulance service-icon" aria-hidden="true"></i>
+          <p>Our Surgical department is committed to providing excellent surgical care with a focus on patient safety and optimal outcomes. Our team of experienced surgeons specializes in a wide range of procedures from minimally invasive to complex surgeries.</p>
+          
+          <div class="service-features">
+            <h5>Surgical Specialties:</h5>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> General surgery</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Orthopedic surgery</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Cardiac surgery</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Neurosurgery</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Laparoscopic and minimally invasive procedures</div>
+          </div>
+          
+          <p>We pride ourselves on our enhanced recovery protocols that help patients return to their normal activities as quickly as possible. Our state-of-the-art operating rooms are equipped with the latest technology to support our surgical team.</p>
+          
+          <p>Pre and post-operative care is provided by our dedicated nursing staff to ensure a smooth recovery process. Our team works closely with patients and their families to provide clear information and support throughout the surgical journey.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Book Consultation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- First Aid Modal -->
+  <div class="modal fade service-modal" id="firstaidModal" tabindex="-1" role="dialog" aria-labelledby="firstaidModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="firstaidModalLabel">First Aid & Trauma Care</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i class="fa fa-medkit service-icon" aria-hidden="true"></i>
+          <p>Our First Aid & Trauma Care services provide immediate response to injuries and medical emergencies. Our trauma team is trained to handle a wide range of situations from minor injuries to major trauma cases.</p>
+          
+          <div class="service-features">
+            <h5>Our Capabilities:</h5>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Immediate assessment and treatment of injuries</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Advanced trauma life support</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Wound care and management</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Fracture stabilization</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Burn treatment</div>
+          </div>
+          
+          <p>Our trauma center is equipped with specialized equipment and staffed by professionals who are experts in emergency medicine. We work closely with emergency services to ensure seamless transition of care for patients arriving by ambulance.</p>
+          
+          <p>We also offer first aid training programs for community members, schools, and organizations to promote safety awareness and preparedness.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Inquire About Training</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add remaining modals for all other services -->
+  <!-- Pediatric Care Modal -->
+  <div class="modal fade service-modal" id="pediatricModal" tabindex="-1" role="dialog" aria-labelledby="pediatricModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pediatricModalLabel">Pediatric Care</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i class="fa fa-child service-icon" aria-hidden="true"></i>
+          <p>Our Pediatric Care department is dedicated to providing comprehensive healthcare for infants, children, and adolescents. We create a child-friendly environment where young patients feel comfortable and parents feel confident in the care provided.</p>
+          
+          <div class="service-features">
+            <h5>Our Pediatric Services:</h5>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Well-child check-ups and immunizations</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Pediatric emergency care</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Treatment for childhood illnesses and conditions</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Developmental assessments</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Pediatric specialists for complex conditions</div>
+          </div>
+          
+          <p>Our pediatric team includes experienced pediatricians, pediatric nurses, and child life specialists who are trained to address the unique healthcare needs of children. We focus not only on treating illnesses but also on preventive care and health education.</p>
+          
+          <p>Our facilities are designed to be welcoming for children, with colorful décor, play areas, and age-appropriate activities to help reduce anxiety during hospital visits.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Schedule Check-up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Patient-Centered Care Modal -->
+  <div class="modal fade service-modal" id="centeredModal" tabindex="-1" role="dialog" aria-labelledby="centeredModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="centeredModalLabel">Patient-Centered Care</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i class="fa fa-users service-icon" aria-hidden="true"></i>
+          <p>At Matoshree Hospital, our Patient-Centered Care approach puts you at the center of everything we do. We believe in treating the whole person, not just the illness, and involving you in all decisions about your healthcare.</p>
+          
+          <div class="service-features">
+            <h5>Our Approach Includes:</h5>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Personalized treatment plans</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Shared decision-making</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Cultural sensitivity and respect</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Family involvement in care</div>
+            <div class="feature-item"><i class="fa fa-check-circle"></i> Continuity of care coordination</div>
+          </div>
+          
+          <p>Our healthcare team takes the time to listen to your concerns, answer your questions, and explain treatment options in clear, understandable terms. We respect your values, preferences, and needs in developing and implementing your treatment plan.</p>
+          
+          <p>We also provide education and resources to help you manage your health effectively and make informed decisions about your care.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Learn About Patient Rights</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- AOS Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  
+  <script>
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+    
+    // Initialize testimonial carousel
+    $(document).ready(function(){
+      $('.testimonial-carousel').owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          768: {
+            items: 2
+          },
+          992: {
+            items: 3
+          }
+        },
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true
+      });
+      
+      // Service modal display based on service clicked
+      $('.service-details-btn').on('click', function(e){
+        e.preventDefault();
+        var service = $(this).data('service');
+        $('#' + service + 'Modal').modal('show');
+      });
+    });
+    
+    // Search functionality
+    function searchServices() {
+      // Get the search input value
+      var input = document.getElementById('serviceSearch');
+      var filter = input.value.toUpperCase();
+      
+      // Get all service boxes
+      var services = document.getElementsByClassName('service-box');
+      
+      // Loop through services and hide/show based on search
+      for (var i = 0; i < services.length; i++) {
+        var title = services[i].getElementsByTagName('h5')[0];
+        var desc = services[i].getElementsByTagName('p')[0];
+        
+        if (title.innerHTML.toUpperCase().indexOf(filter) > -1 || desc.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          services[i].style.display = "";
+        } else {
+          services[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+  <style>
+    .service-featured {
+      background-color: #f0f8f4; /* Very light greenish background */
+      padding: 60px 0;
+  }
+  
+  .service-featured h3 {
+      color: #62d2a2; /* The specific green color you requested */
+      margin-bottom: 25px;
+      font-weight: 700;
+  }
+  
+  .service-featured .content {
+      align-items: center;
+  }
+  
+  .service-featured .image img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-featured .text {
+      padding-right: 30px;
+  }
+    /* Update button colors */
+.service-box .btn, .service-modal .modal-footer .btn-primary {
+  background-color: #62d2a2;
+}
+.service-box .btn:hover {
+  background-color: #50b085; /* Darker shade for hover */
+}
+
+/* Update heading underline */
+.heading_container h2::after {
+  background-color: #62d2a2;
+}
+
+/* Update modal headers */
+.service-modal .modal-header {
+  background-color: #62d2a2;
+}
+
+/* Update service box icons */
+.service-box .img-box {
+  background-color: #62d2a2;
+}
+.service-box:hover .img-box {
+  background-color: #50b085; /* Darker shade for hover */
+}
+
+/* Update section divider */
+.section-divider {
+  background: linear-gradient(to right, transparent, #62d2a2, transparent);
+}
+
+/* Update service count and category */
+.service-count {
+  background-color: #62d2a2;
+}
+
+/* Update feature icons */
+.service-modal .feature-item i {
+  color: #62d2a2;
+}
+
+/* Update service icon color */
+.service-modal .service-icon {
+  color: #62d2a2;
+}
+  </style>
+</body>
+</html>

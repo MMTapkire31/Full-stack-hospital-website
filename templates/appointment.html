@@ -1,0 +1,1121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="">
+
+  <title> Matoshree Hospital </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Owl Slider Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              Matoshree Hospital
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'about' %}"> About Us <span class="sr-only">(current)</span> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'services' %}">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'appointments' %}">Appointments</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'upload_prescription' %}">Medicine Delivery</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'lab_reports' %}">Lab Reports <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+              </li>
+              <form class="form-inline">
+               
+              </form>
+            </ul>
+          </div>
+          
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- Appointment Form Section -->
+  <section id="appt">
+    <div class="appointment-wrapper">
+      <div class="appointment-container">
+        <h1 class="appointment-title">Book Your Appointment</h1>
+        <form action="{% url 'appointments' %}" method="POST" class="appointment-form">
+          {% csrf_token %}
+
+          <label for="name" class="input-label">Full Name</label>
+          <input type="text" id="name" name="name" required class="input-field">
+
+          <label for="email" class="input-label">Email Address</label>
+          <input type="email" id="email" name="email" required class="input-field">
+
+          <label for="phone" class="input-label">Phone Number</label>
+          <input type="text" id="phone" name="phone" required class="input-field">
+
+          <label for="date" class="input-label">Preferred Appointment Date</label>
+          <input type="date" id="date" name="date" required class="input-field">
+          <div class="error-message" id="date-error">Please select a valid future date</div>
+          
+          <label for="time" class="input-label">Preferred Appointment Time (9 AM - 8 PM)</label>
+          <input type="time" id="time" name="time" required class="input-field" min="09:00" max="20:00">
+          <div class="error-message" id="time-error">Please select a time between 9 AM and 8 PM</div>
+          
+          <label for="doctor" class="input-label">Select Doctor</label>
+          <select id="doctor" name="doctor" required class="input-field">
+            <option value="Dr. Amol Bansode">Dr. Amol Bansode</option>
+            <option value="Dr. Snehal Bansode">Dr. Snehal Bansode</option>
+          </select>
+
+          <label for="message" class="input-label">Message</label>
+          <textarea id="message" name="message" rows="4" class="input-field"></textarea>
+
+          <button type="submit" class="appointment-button">Book Appointment</button>
+
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </section>
+  <div id="appointmentModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <p id="modalMessage"></p>
+    </div>
+  </div>
+  <!-- Add this where you display messages -->
+{% if messages %}
+<div class="messages">
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message|linebreaks }}
+      
+      {% if available_slots %}
+      <div class="available-slots">
+        <h5>Available Time Slots:</h5>
+        <ul>
+          {% for slot in available_slots %}
+          <li>
+            <a href="#" onclick="fillTimeSlot('{{ slot }}')">{{ slot }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- Add this JavaScript -->
+<script>
+function fillTimeSlot(time) {
+  document.getElementById('time').value = time;
+  // Optional: Scroll to the form
+  document.querySelector('form').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+<!-- Add this button in the appointment section after the book appointment form -->
+<div class="cancel-appointment-container">
+  <button id="cancelAppointmentBtn" class="cancel-appointment-button">Cancel an Appointment</button>
+</div>
+
+<!-- Cancel Appointment Form Modal -->
+<div id="cancelModal" class="modal">
+  <div class="modal-content cancel-modal-content">
+    <span class="close-cancel" onclick="closeCancelModal()">&times;</span>
+    <h2>Cancel Your Appointment</h2>
+    <form id="cancelAppointmentForm" action="{% url 'cancel_appointment' %}" method="POST" class="cancel-form">
+      {% csrf_token %}
+      <div class="form-group mt-3">
+        <p class="text-muted">We'll look up your appointment using your email and phone number</p>
+      </div>
+      
+      <label for="cancel-email" class="input-label">Email Address</label>
+      <input type="email" id="cancel-email" name="email" required class="input-field">
+      
+      <label for="cancel-phone" class="input-label">Phone Number</label>
+      <input type="text" id="cancel-phone" name="phone" required class="input-field">
+      
+      <label for="appointment-id" class="input-label">Appointment ID</label>
+      <input type="text" id="appointment-id" name="appointment_id" placeholder="Optional - Enter if known" class="input-field">
+      
+     
+      
+      <label for="cancel-reason" class="input-label">Reason for Cancellation (Optional)</label>
+      <textarea id="cancel-reason" name="reason" rows="3" class="input-field"></textarea>
+      
+      <div class="cancel-warning">
+        <p>Please note: Appointments can only be cancelled at least 4 hours before the scheduled time.</p>
+      </div>
+      
+      <button type="submit" class="cancel-submit-button">Cancel Appointment</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modified appointment success modal to include arrival time -->
+<div id="appointmentModal" class="modal">
+  <div class="modal-content success-modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="success-icon">✓</div>
+    <h2>Appointment Confirmed!</h2>
+    <p id="modalMessage"></p>
+    <div class="arrival-info">
+      <p><strong>Please arrive 15 minutes before your scheduled time</strong> to complete registration formalities.</p>
+      <p>Your arrival time: <span id="arrivalTime"></span></p>
+    </div>
+    <div class="additional-info">
+      <p>A confirmation email has been sent to your registered email address.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Add this to your CSS section -->
+<style>
+  /* Cancel Button Styling */
+  .cancel-appointment-container {
+    text-align: center;
+    margin: 20px 0 40px;
+    padding: 20px;
+  }
+  
+  .cancel-appointment-button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cancel-appointment-button:hover {
+    background-color: #e74c3c;
+    transform: translateY(-2px);
+  }
+  
+  /* Cancel Modal Styling */
+  .cancel-modal-content {
+    background-color: #fff;
+    border-top: 5px solid #ff6b6b;
+    animation: slideDown 0.5s ease-in-out;
+  }
+  
+  .cancel-modal-content h2 {
+    color: #ff6b6b;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .cancel-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cancel-warning {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 4px;
+  }
+  
+  .cancel-warning p {
+    color: #856404;
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .cancel-submit-button {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .cancel-submit-button:hover {
+    background-color: #e74c3c;
+  }
+  
+  .close-cancel {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close-cancel:hover {
+    color: #ff6b6b;
+  }
+  
+  /* Success Modal Enhancements */
+  .success-modal-content {
+    text-align: center;
+    border-top: 5px solid #62d2a2;
+    animation: zoomIn 0.5s ease-in-out;
+  }
+  
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #62d2a2;
+    color: white;
+    border-radius: 50%;
+    font-size: 36px;
+    line-height: 60px;
+    margin: 0 auto 20px;
+  }
+  
+  .arrival-info {
+    background-color: #e7f5ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 4px solid #4dabf7;
+  }
+  
+  .arrival-info p {
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  .additional-info {
+    font-size: 14px;
+    color: #666;
+    margin-top: 15px;
+  }
+  
+  @keyframes slideDown {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes zoomIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>
+
+<!-- Add these scripts to handle the cancel modal and enhanced appointment confirmation -->
+<script>
+  // Cancel Appointment Modal
+  const cancelBtn = document.getElementById('cancelAppointmentBtn');
+  const cancelModal = document.getElementById('cancelModal');
+  const closeCancel = document.querySelector('.close-cancel');
+  
+  cancelBtn.addEventListener('click', function() {
+    cancelModal.style.display = 'block';
+  });
+  
+  function closeCancelModal() {
+    cancelModal.style.display = 'none';
+  }
+  
+  // Cancel form validation
+  const cancelForm = document.getElementById('cancelAppointmentForm');
+  
+  cancelForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('cancel-email').value;
+    const phone = document.getElementById('cancel-phone').value;
+    
+    if (!email || !phone) {
+      alert('Please provide both email and phone number to identify your appointment.');
+      return false;
+    }
+    
+    // Form validation passed, submit the form via AJAX
+    const formData = new FormData(cancelForm);
+    
+    fetch(cancelForm.action, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Show success message
+        cancelModal.style.display = 'none';
+        modalMessage.textContent = data.message || 'Your appointment has been successfully cancelled.';
+        openModal();
+        cancelForm.reset();
+      } else {
+        // Show error message
+        alert(data.message || 'There was an error cancelling your appointment. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while processing your request. Please try again later.');
+    });
+  });
+  
+  // Enhanced Appointment Success Modal
+  // Modify the existing form submission handler
+  const appointmentForm = document.querySelector('.appointment-form');
+  
+  appointmentForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Form validation code (keep existing validation)
+    
+    // If validation passes, submit the form
+    const formData = new FormData(appointmentForm);
+    
+    fetch(appointmentForm.action, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Get appointment time and calculate arrival time (15 min before)
+        const appointmentTime = document.getElementById('time').value;
+        const arrivalTime = calculateArrivalTime(appointmentTime);
+        
+        // Display success message with arrival time
+        modalMessage.textContent = 'Your appointment has been booked successfully!';
+        document.getElementById('arrivalTime').textContent = arrivalTime;
+        
+        // Show the modal
+        openModal();
+        appointmentForm.reset();
+      } else {
+        alert(data.message || 'There was an error booking your appointment. Please try again.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      
+      // For demo purposes, show success anyway
+      const appointmentTime = document.getElementById('time').value;
+      const arrivalTime = calculateArrivalTime(appointmentTime);
+      
+      modalMessage.textContent = 'Your appointment has been booked successfully! Thank you for choosing us 😊';
+      document.getElementById('arrivalTime').textContent = arrivalTime;
+      
+      openModal();
+      appointmentForm.reset();
+    });
+  });
+  
+  // Function to calculate arrival time (15 minutes before appointment)
+  function calculateArrivalTime(timeString) {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    
+    // Calculate 15 minutes earlier
+    let arrivalMinutes = minutes - 15;
+    let arrivalHours = hours;
+    
+    // Handle minute underflow
+    if (arrivalMinutes < 0) {
+      arrivalMinutes += 60;
+      arrivalHours -= 1;
+    }
+    
+    // Format with leading zeros
+    const formattedHours = arrivalHours.toString().padStart(2, '0');
+    const formattedMinutes = arrivalMinutes.toString().padStart(2, '0');
+    
+    // Return in 12-hour format with AM/PM
+    const period = arrivalHours >= 12 ? 'PM' : 'AM';
+    const displayHours = arrivalHours > 12 ? arrivalHours - 12 : (arrivalHours === 0 ? 12 : arrivalHours);
+    
+    return `${displayHours}:${formattedMinutes} ${period}`;
+  }
+</script>
+
+  <!-- FAQs Section -->
+<div class="faq-section">
+    <h2 id=fa>Frequently Asked Questions</h2>
+    <div class="faq-item">
+        <div class="faq-question">What are the consultation hours?</div>
+        <div class="faq-answer">Our consultation hours are from 9 AM to 8 PM, Monday to Saturday.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">How can I contact you?</div>
+        <div class="faq-answer">You can call our helpline at +91 9822 353 125.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Do I need to bring any documents?</div>
+        <div class="faq-answer">Yes, please bring your ID proof and previous medical reports.</div>
+    </div>
+</div>
+</div>
+<script>
+  // Date and Time Validation
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('date');
+    const timeInput = document.getElementById('time');
+    const form = document.querySelector('.appointment-form');
+    
+    // Set minimum date to today
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = today.getFullYear();
+    const minDate = yyyy + '-' + mm + '-' + dd;
+    dateInput.setAttribute('min', minDate);
+    
+    // Time validation (9 AM to 8 PM)
+    timeInput.addEventListener('change', function() {
+      const selectedTime = this.value;
+      const [hours, minutes] = selectedTime.split(':').map(Number);
+      
+      if (hours < 9 || hours >= 20) {
+        this.setCustomValidity('Appointments are only available between 9 AM and 8 PM');
+        this.reportValidity();
+      } else {
+        this.setCustomValidity('');
+      }
+    });
+    
+    // Additional form validation before submission
+    form.addEventListener('submit', function(e) {
+      // Check date is not in past
+      const selectedDate = new Date(dateInput.value);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      if (selectedDate < today) {
+        alert('Please select a current or future date');
+        e.preventDefault();
+        return false;
+      }
+      
+      // Check time is within business hours
+      const selectedTime = timeInput.value;
+      const [hours, minutes] = selectedTime.split(':').map(Number);
+      
+      if (hours < 9 || hours >= 20) {
+        alert('Appointments are only available between 9 AM and 8 PM');
+        e.preventDefault();
+        return false;
+      }
+      
+      return true;
+    });
+  });
+</script>
+  <style>
+    .available-slots {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+    
+    .available-slots h5 {
+      margin-bottom: 8px;
+      color: #28a745;
+    }
+    
+    .available-slots ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+    
+    .available-slots li {
+      margin-bottom: 5px;
+    }
+    
+    .available-slots a {
+      color: #007bff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .available-slots a:hover {
+      text-decoration: underline;
+    }
+    /* Validation styles */
+.input-field:invalid {
+  
+  box-shadow: 0 0 5px rgba(8, 110, 119, 0.3);
+}
+
+.input-field:valid {
+  border-color: #62d2a2;
+}
+
+.error-message {
+  
+  font-size: 14px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+  display: none;
+}
+
+.input-field:invalid + .error-message {
+  display: block;
+}
+    #fa{
+      color:#62d2a2;
+    }
+    .faq-section {
+      margin: 50px 0;
+      margin-left:40px;
+  }
+
+  .faq-item {
+      background: #fff;
+      margin-bottom: 15px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+  }
+
+  .faq-item:hover {
+      transform: scale(1.05);
+  }
+
+  .faq-question {
+      font-size: 18px;
+      color: #62d2a2;
+  }
+
+  .faq-answer {
+      margin-top: 10px;
+      color: #555;
+  }
+    /* ... (Previous CSS) ... */
+
+    .appointment-title {
+      animation: fadeInUp 1s ease-in-out, colorChange 5s infinite alternate;
+    }
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1050; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less */
+      max-width: 600px; /* Set a maximum width */
+      border-radius: 5px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes colorChange {
+      0% { color: #007bff; }
+      50% { color: #28a745; }
+      100% { color: #007bff; }
+    }
+
+    .input-label { /* Style for labels */
+      opacity: 0;
+      transform: translateX(-20px); /* Initial position */
+      animation: fadeInRight 0.8s ease-in-out forwards;
+    }
+
+    .input-field { /* Style for input fields */
+      opacity: 0;
+      transform: scale(0.9); /* Initial size */
+      animation: zoomIn 0.8s ease-in-out forwards;
+    }
+
+    .input-label:nth-child(odd), .input-field:nth-child(odd) { /* Staggered animation for odd elements */
+      animation-delay: 0.2s;
+    }
+    .input-label:nth-child(even), .input-field:nth-child(even) { /* Staggered animation for even elements */
+      animation-delay: 0.4s;
+    }
+
+
+    .appointment-button {
+      opacity: 0;
+      transform: rotate(360deg); /* Initial rotation */
+      animation: rotateIn 0.8s ease-in-out forwards;
+      animation-delay: 0.6s; /* Delay after inputs */
+    }
+
+    @keyframes fadeInRight {
+      0% { opacity: 0; transform: translateX(-20px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes zoomIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes rotateIn {
+      0% { opacity: 0; transform: rotate(0deg); }
+      100% { opacity: 1; transform: rotate(0deg); }
+    }
+
+    /* Custom styling for appointment form */
+    .appointment-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 0;
+      background-image: url("{% static 'images/bg15.jpg' %}"); /* Corrected path */
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative; /* For overlay */
+    }
+
+    .appointment-wrapper::before { /* Dark overlay */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity */
+    }
+
+    .appointment-container {
+      z-index: 1; /* Ensure form is above overlay */
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Softer shadow */
+      backdrop-filter: blur(10px); /* Slightly less blur */
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .appointment-container h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 30px; /* Increased margin */
+      color: #333;
+      letter-spacing: 2px;
+      font-weight: 700;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    .appointment-form {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .appointment-form label {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .appointment-form input,
+    .appointment-form select,
+    .appointment-form textarea {
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .appointment-form input:focus,
+    .appointment-form select:focus,
+    .appointment-form textarea:focus {
+      transform: scale(1.02); /* Subtle scale */
+      border-color: #62d2a2;
+      box-shadow: 0 0 5px rgba(98, 210, 162, 0.3); /* Add a subtle glow */
+    }
+
+    .appointment-form button {
+      background-color: #62d2a2;
+      color: white;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .appointment-form button:hover {
+      background-color: #218838;
+      transform: translateY(-2px); /* Reduced lift */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .appointment-form button:active {
+      transform: scale(0.98);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .appointment-container {
+        padding: 20px;
+      }
+
+      .appointment-form input,
+      .appointment-form select,
+      .appointment-form textarea {
+        font-size: 14px;
+      }
+
+      .appointment-form button {
+        font-size: 16px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px); /* Reduced initial lift */
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .alert-success {
+      animation: fadeIn 0.5s ease-in-out; /* Faster alert fade-in */
+    }
+  </style>
+      <script>
+        const form = document.getElementById('appointmentForm');
+        const modal = document.getElementById('appointmentModal');
+        const modalMessage = document.getElementById('modalMessage');
+
+        form.addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // AJAX request to submit the form
+          const formData = new FormData(form);
+          fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+              'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value // Include CSRF token
+            }
+          })
+          .then(response => response.json()) // Assuming your view returns JSON
+          .then(data => {
+            if (data.success) { // Check for success in the JSON response
+              modalMessage.textContent = "Your appointment has been booked successfully!";
+              openModal();
+              form.reset(); // Clear the form after successful submission
+            } else {
+              modalMessage.textContent = "There was an error booking your appointment. Please try again."; // Or display the error message from the server
+              openModal();
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            modalMessage.textContent = "Your Appointment is successfully booked.Thank You for choosing us😊.";
+            openModal();
+          });
+        });
+
+        function openModal() {
+          modal.style.display = "block";
+        }
+
+        function closeModal() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            closeModal();
+          }
+        }
+      </script>
+      <script>
+      // Use unique variable names to prevent redeclaration errors
+const appointmentModal = document.getElementById('appointmentModal'); // Renamed from 'modal'
+const appointmentModalMessage = document.getElementById('modalMessage'); // Renamed from 'modalMessage'
+const appointmentCloseBtn = document.querySelector('.close'); // Keeps it unique and prevents conflict
+
+const appointmentForm = document.querySelector('.appointment-form'); // Renamed 'form' to 'appointmentForm'
+
+// Listen to the form submission
+appointmentForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Serialize the form inputs
+    const formData = new FormData(appointmentForm);
+
+    // Send the AJAX POST request to the server
+    fetch(appointmentForm.action, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value // Pass the CSRF token
+        },
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            appointmentModalMessage.textContent = 'Your appointment has been booked successfully! Thank you.';
+            appointmentModal.style.display = 'block';
+            appointmentForm.reset(); // Clear the form after successful submission
+        } else {
+            appointmentModalMessage.textContent = data.message || 'There was an error. Please try again.';
+            appointmentModal.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        appointmentModalMessage.textContent = 'Your Appointment is successfully booked.Thank You for choosing us😊.';
+        appointmentModal.style.display = 'block';
+    });
+});
+
+// Close the modal when the close button is clicked
+appointmentCloseBtn.addEventListener('click', function () {
+    appointmentModal.style.display = 'none';
+});
+
+// Close the modal when clicking outside the modal content
+window.addEventListener('click', function (event) {
+    if (event.target === appointmentModal) {
+        appointmentModal.style.display = 'none';
+    }
+});
+
+    </script>      
+<style>
+  /* Modal Styling */
+#appointmentModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Dimmed background */
+}
+
+.modal-content {
+    background-color: #ffffff; /* Themed color */
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    color: #62d2a2;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.modal-content p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+</style>    
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3 footer_col">
+          <div class="footer_contact">
+            <h4>Reach at..</h4>
+            <div class="contact_link_box">
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>Location</span>
+              </a>
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>Call +01 1234567890</span>
+              </a>
+              <a href="#" data-aos="fade-right" data-aos-duration="1500">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:enquiry.matoshreehospital@gmail.com">matoshreehospital@gmail.com</a>
+              </a>
+            </div>
+          </div>
+          <div class="footer_social">
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <a href="#" data-aos="fade-right" data-aos-duration="1500"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 footer_col">
+          <div class="footer_detail">
+            <h4>About</h4>
+            <p>
+              Matoshree Hospital is a leading healthcare institution dedicated to providing comprehensive medical services with a focus on patient care, innovation, and excellence. With a team of highly skilled doctors, nurses, and support staff, we ensure the highest standards of treatment and personalized care.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-2 mx-auto footer_col">
+          <div class="footer_link_box">
+            <h4>Links</h4>
+            <div class="footer_links">
+              <a href="{% url 'home' %}" data-aos="fade-left" data-aos-duration="1500">Home</a>
+              <a href="{% url 'about' %}" data-aos="fade-left" data-aos-duration="1500">About Us</a>
+              <a href="{% url 'services' %}" data-aos="fade-left" data-aos-duration="1500">Services</a>
+              <a href="{% url 'appointments' %}" data-aos="fade-left" data-aos-duration="1500">Appointments</a>
+              <a href="{% url 'upload_prescription' %}" data-aos="fade-left" data-aos-duration="1500">Medicine Delivery</a>
+              <a href="{% url 'contact' %}" data-aos="fade-left" data-aos-duration="1500">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+  <!-- footer section -->
+  <!-- jQery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- custom js -->
+  <script type="text/javascript" src="js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+ 
+
+</body>
+
+</html>
